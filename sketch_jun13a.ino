@@ -9,10 +9,7 @@ int servo_pos = 0;
 int loop_index = 0;
 const int buffer_len = 66;
 char message[buffer_len];
-const byte milestone_count = 3;
 const byte milestone_addr = 0;
-byte active_milestone = 1;
-byte final_milestone = 3;
 
 //backyard
 //goog maps: 32.946352, -117.113197
@@ -44,8 +41,11 @@ byte final_milestone = 3;
 //middle of street, down four houses: 32.945908, -117.113693
 //middle of street, top corner: 32.946395, -117.112243
 //middle of park
-const float google_target_latitudes[milestone_count] = {32.946105, 32.945908, 32.946395};
-const float google_target_longitudes[milestone_count] = { -117.112999, -117.113693, -117.112243};
+const byte milestone_count = 3;
+byte active_milestone = 1;
+byte final_milestone = 3;
+const float google_target_latitudes[milestone_count] = {99,99,99}; //{32.946105, 32.945908, 32.946395};
+const float google_target_longitudes[milestone_count] = {99,99,99}; //{ -117.112999, -117.113693, -117.112243};
 
 float eps = .0005;
 const float google_maps_lat_delta = 0; //-0.00009;
@@ -63,6 +63,12 @@ const float target_longitudes[milestone_count] = {google_target_longitudes[0] + 
 
 void setup()
 {
+  Serial.println("before delay");
+  
+  delay(5000);
+
+  Serial.println("after delay");
+  
   GpsSetup();
 
   servo.attach(10);
@@ -82,9 +88,9 @@ void loop()                     // run over and over again
 //    Write(milestone_addr, 1);
 //    return;
 
-Serial.println("Start o loop");
-Serial.println("");
-Serial.println("");
+  Serial.println("Start o loop");
+  Serial.println("");
+  Serial.println("");
   Serial.print("Loop index: ");
   Serial.println(loop_index);
   Serial.println("Milestone number: "),
